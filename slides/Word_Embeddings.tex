@@ -340,7 +340,7 @@ BERT                       & Devlin et al. (2019, arxiv) \\ \hline
 \item Two learning algorithms:
 	\begin{itemize}
 	\item the Continuous Bag-of-Words (CBOW) 
-	\item \alert<2->{the Skip-Gram model}
+	\item \alert<2->{the Skip-Gram model}\visible<3->{:  predict \alert{context} based on \alert{target} word.}
 	\end{itemize}
 \end{itemize}
 
@@ -351,7 +351,26 @@ BERT                       & Devlin et al. (2019, arxiv) \\ \hline
 
 \end{frame}
 
-\begin{frame}{The Skip-Gram Model: Intuition}
+\begin{frame}{The Skip-Gram Model: Architecture}
+
+\begin{center}
+        \includegraphics[width=0.85\linewidth]{./img/skip_gram3}
+\end{center}
+
+\vspace{-0.2cm}
+\resizebox{.7\textwidth}{!}{% 
+ \begin{table}[]
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+\hline
+0.3 & 0.1 & 0.38 & 0.22 & 0.05 & 0.09 & ... & 0.98 & 0.13 & 0.2\\ \hline
+\end{tabular}
+\end{table}
+}
+\end{frame}
+
+
+
+\begin{frame}{The Skip-Gram Model: Predicting Context}
 
 	\begin{itemize}
 	\item Skip-Gram: predict \alert{context} based on \alert{target} word.
@@ -360,22 +379,6 @@ BERT                       & Devlin et al. (2019, arxiv) \\ \hline
 \begin{center}
         \includegraphics[width=1\linewidth]{./img/skip_gram_training}
 \end{center}
-\end{frame}
-
-\begin{frame}{The Skip-Gram Model: Architecture}
-
-\begin{center}
-        \includegraphics[width=1\linewidth]{./img/skip_gram1}
-\end{center}
-
-\resizebox{.7\textwidth}{!}{% 
- \begin{table}[]
-\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
-\hline
-0.3 & 0.1 & \alert{0.38} & \alert{0.22} & 0.05 & 0.09 & ... & \alert{0.98} & 0.13 & 0.2\\ \hline
-\end{tabular}
-\end{table}
-}
 \end{frame}
 
 
