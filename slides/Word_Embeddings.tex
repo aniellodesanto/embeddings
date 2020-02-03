@@ -5,10 +5,27 @@
 \usepackage{mycommands}
 
 
-\title{\texorpdfstring{Lexical Semantics and Word Embeddings}{}}
-\author{Aniello De Santo}
-\institute{San Jose State\\\texttt{aniello.desanto@stonybrook.edu}}
-\date{}
+\title{\texorpdfstring{Exploring Lexical Semantics \\with Word Embeddings}{}}
+\author[DeSanto]{\texorpdfstring{%
+                            \textbf{Aniello De Santo}                            }
+                            {Aniello De Santo} 
+                        }
+\institute{
+\texttt{aniellodesanto.github.io\\aniello.desanto@stonybrook.edu}
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[draw=Red3, fill=Red3!25, thick, align=center]
+            (hint) at ($(current page.center) + (15em,-3em)$)
+            {Get the slides!};
+              % \draw[Red3,thick,-{Latex[length=.5em]}] (hint) - + (-2em,0em);
+            % \draw[Red3,thick,-{Latex[length=.5em]}] (hint) - + (-1.5em,1.5em);
+               \draw [Red3,thick,-{Latex[length=.5em]}] (hint) edge ($(current page.center) + (15em,-5em)$) ;
+    %     \draw[Red3,thick,-{Latex[length=.5em]}] (hint) |- +(-4.5em,4.25em);
+            \node[inner sep=0pt]  (hint2) at ($(current page.center) + (15em,-10em)$) {\includegraphics[width=0.25\linewidth]{img/QR_slides.png}};
+    \end{tikzpicture}
+
+}
+\date{San Jose State\\ Feb 6, 2020}
+%%%%%%%%
 
 
 
@@ -199,72 +216,14 @@
                     thousands of dimensions (thousands of unique words)
                     \item most of the words in the vocabulary will not co-occur in the same sentence (or document!)\\
                     $\Rightarrow$ results in vectors with mostly empty (zeros) slots.
-                      \item Efficient in computation?
                       \item Will similar words have similar vectors?
                          \end{itemize}
                             \end{itemize}
 
 \end{frame}
 
-\begin{frame}{Problems? [cont.]}
-\begin{center}
-          \alert{\textbf{Will similar words have similar vectors?}}
- \end{center}
- 
-\begin{itemize}
-\item  Consider the following sentences: 
 
- \begin{enumerate}
-\item I like watching movies.
-\item I enjoy watching movies.
-\item I hate watching movie.
-\end{enumerate}
-\end{itemize}
-
-\begin{itemize}
-\item What is the distance between \emph{like}, \emph{enjoy}, and \emph{hate}?
-\end{itemize}
-
-\vspace{0.2cm}
-\begin{itemize}
-\item \visible<2->{How similar are the following sentences?}
-\end{itemize}
-\visible<2->{
-  \begin{enumerate}
-\item I like pancakes.
-\item Steven enjoys cookies.
-\end{enumerate}
-}
-\end{frame}
-
-\begin{frame}{Word Embeddings}
-
-We saw sparse vectors:
-
-\begin{table}[]
-\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
-\hline
-0 & \alert{1} & 0 & 0 & 0 & 0 & ... & 0 & 0 & 0 \\ \hline
-\end{tabular}
-\end{table}
-
-\pause
- \begin{itemize}   
-          \item  But word vectors can be dense:\\
- real numbers in a small number of dimensions
-\item Compress sparse matrices into smaller ones
- \end{itemize}
- 
- \begin{table}[]
-\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
-\hline
-0.3 & 0.1 & \alert{0.38} & \alert{0.22} & 0.05 & 0.09 & ... & \alert{0.98} & 0.13 & 0.2\\ \hline
-\end{tabular}
-\end{table}
-\end{frame}
-
-
-\begin{frame}{Some Word Embedding Methods}
+\begin{frame}{Word Embedding Methods}
 \centering 
 
 \begin{table}[]
@@ -288,6 +247,17 @@ BERT                       & Devlin et al. (2019, arxiv) \\ \hline
 \end{alertblock}
 
 \end{frame}
+
+%\begin{frame}{Word2Vec}
+%
+%\begin{itemize}
+%\item Word2Vec is  \textbf{predictive model} for learning word embeddings from raw text
+%\item  a shallow, two-layer neural networks trained to reconstruct linguistic contexts of words
+%\item words that share common contexts in the corpus are located in close proximity to one another in the space
+%\end{itemize}
+%
+%
+%\end{frame}
 
 
 \begin{frame}{A Quick Excursus: The Perceptron}
@@ -366,7 +336,7 @@ BERT                       & Devlin et al. (2019, arxiv) \\ \hline
 \begin{frame}{Back to Word2Vec}
 
 \begin{itemize}
-\item  A  two-layer NN trained to reconstruct linguistic contexts of words
+\item  A NN trained to reconstruct linguistic contexts of words
 \item Two learning algorithms:
 	\begin{itemize}
 	\item the Continuous Bag-of-Words (CBOW) 
@@ -398,29 +368,14 @@ BERT                       & Devlin et al. (2019, arxiv) \\ \hline
         \includegraphics[width=1\linewidth]{./img/skip_gram1}
 \end{center}
 
-\footnotesize{Source: \href{https://israelg99.github.io/2017-03-23-Word2Vec-Explained/}{A nice technical tutorial}}
-\end{frame}
-
-\begin{frame}{The Skip-Gram Model: Some Details]}
-
-\begin{itemize}
-\item some math:
-\end{itemize}
-
-\begin{center}
-        \includegraphics[width=0.8\linewidth]{./img/skip_gram_matrix}
-\end{center}
-
-\vspace{0.5cm}
-
-\begin{itemize}
-\item a high-level illustration of the architecture:
-\end{itemize}
-
-\begin{center}
-        \includegraphics[width=1\linewidth]{./img/skip_gram2}
-\end{center}
-
+\resizebox{.7\textwidth}{!}{% 
+ \begin{table}[]
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+\hline
+0.3 & 0.1 & \alert{0.38} & \alert{0.22} & 0.05 & 0.09 & ... & \alert{0.98} & 0.13 & 0.2\\ \hline
+\end{tabular}
+\end{table}
+}
 \end{frame}
 
 
@@ -477,7 +432,7 @@ BERT                       & Devlin et al. (2019, arxiv) \\ \hline
         \begin{itemize}
             \item Word association tasks (Rubistein et al. 2015)
              \item ERP measures of context appropriateness \\ (Broderik et al. 2018, Ettinger et al. 2016)
-              \item  Priming effects (Gunther et al., 2016)
+              \item  Priming effects (Gunther et al. 2016)
                  \begin{itemize}
                \item Check it out: \href{http://www.u.arizona.edu/~kforster/priming/index.htm}{\textbf{Masked priming effects!}}
        		 \end{itemize}
@@ -559,8 +514,9 @@ BERT                       & Devlin et al. (2019, arxiv) \\ \hline
 \item \href{https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf}{Distributed Representations of Words and Phrases and their Compositionality}
 \item \href{https://arxiv.org/pdf/1301.3781.pdf}{Efficient Estimation of Word Representations in Vector Space}
 \item \href{http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf}{A Neural Probabilistic Language Model}
-\item \href{http://mccormickml.com/}{A nice series of block posts by Chris McCormick}
+\item \href{http://mccormickml.com/}{A nice series of blog posts by Chris McCormick}
 \item \href{http://sro.sussex.ac.uk/id/eprint/61062/1/Batchkarov,\%20Miroslav\%20Manov.pdf}{Evaluating distributional models of compositional semantics}
+\item  \href{https://israelg99.github.io/2017-03-23-Word2Vec-Explained/}{A semi-technical tutorial (some of the pictures in this presentation are from there)}
 \item \href{http://www.mattkenney.me/google-word2vec-biases/}{Exploring the Implications of Biases in Word2Vec}
 \item \href{https://arxiv.org/pdf/1607.06520.pdf}{Debiasing Word Embeddings}
 \end{enumerate}
@@ -577,6 +533,89 @@ BERT                       & Devlin et al. (2019, arxiv) \\ \hline
 %
 \end{frame}
 }
+
+
+\begin{frame}{Word Embeddings}
+
+We saw sparse vectors:
+
+\begin{table}[]
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+\hline
+0 & \alert{1} & 0 & 0 & 0 & 0 & ... & 0 & 0 & 0 \\ \hline
+\end{tabular}
+\end{table}
+
+\pause
+ \begin{itemize}   
+          \item  But word vectors can be dense:\\
+ real numbers in a small number of dimensions
+\item Compress sparse matrices into smaller ones
+ \end{itemize}
+ 
+ \begin{table}[]
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+\hline
+0.3 & 0.1 & \alert{0.38} & \alert{0.22} & 0.05 & 0.09 & ... & \alert{0.98} & 0.13 & 0.2\\ \hline
+\end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}{The Skip-Gram Model: Some Details}
+
+\begin{itemize}
+\item some math:
+\end{itemize}
+
+\begin{center}
+        \includegraphics[width=0.8\linewidth]{./img/skip_gram_matrix}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{itemize}
+\item a high-level illustration of the architecture:
+\end{itemize}
+
+\begin{center}
+        \includegraphics[width=1\linewidth]{./img/skip_gram2}
+\end{center}
+
+\footnotesize{Source: \href{https://israelg99.github.io/2017-03-23-Word2Vec-Explained/}{A nice technical tutorial}}
+\end{frame}
+
+\begin{frame}{W2V: Problems?}
+\begin{center}
+          \alert{\textbf{Will similar words have similar vectors?}}
+ \end{center}
+ 
+\begin{itemize}
+\item  Consider the following sentences: 
+
+ \begin{enumerate}
+\item I like watching movies.
+\item I enjoy watching movies.
+\item I hate watching movie.
+\end{enumerate}
+\end{itemize}
+
+\begin{itemize}
+\item What is the distance between \emph{like}, \emph{enjoy}, and \emph{hate}?
+\end{itemize}
+
+\vspace{0.2cm}
+\begin{itemize}
+\item \visible<2->{How similar are the following sentences?}
+\end{itemize}
+\visible<2->{
+  \begin{enumerate}
+\item I like pancakes.
+\item Steven enjoys cookies.
+\end{enumerate}
+}
+\end{frame}
+
+
 
 \begin{frame}{An Observation on Frequencies: Zipf's Law}
     \begin{columns}
